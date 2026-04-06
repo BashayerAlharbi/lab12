@@ -1,0 +1,51 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h1{
+    color: darkblue;
+}
+
+#linksbox{
+    padding: 20px;
+    background-color: #f2f2f2;
+    width: 300px;
+    margin: auto;
+}
+
+.mylink{
+    display: block;
+    padding: 10px;
+    margin: 8px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+}
+
+.mylink:hover{
+    background-color: orange;
+}
+
+.mylink:visited{
+    color: yellow;
+}
+
+.mylink:active{
+    background-color: red;
+}
+
+ul, ol{
+    text-align: left;
+    display: inline-block;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 1px solid black;
+    padding: 10px;
+}
