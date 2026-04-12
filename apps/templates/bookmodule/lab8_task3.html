@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<h2>Books (NOT edition > 3 and NOT contains 'qu')</h2>
+
+{% for b in books %}
+    {{ b.title }} - {{ b.author }} - {{ b.edition }}
+    <hr>
+{% empty %}
+    No results
+{% endfor %}
+
+{% endblock %}
