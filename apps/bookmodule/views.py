@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Book
 
 #def index(request):
  #   name = request.GET.get("name") or "world!"
@@ -77,3 +78,35 @@ def __getBooksList():
     book2 = {'id':56788765,'title':'Reversing: Secrets of Reverse Engineering', 'author':'E. Eilam'}
     book3 = {'id':43211234, 'title':'The Hundred-Page Machine Learning Book', 'author':'Andriy Burkov'}
     return [book1, book2, book3]
+
+from django.http import HttpResponse
+from .models import Book
+
+def insert_books(request):
+    Book.objects.create(title='Continuous Delivery', author='J.Humble and D. Farley', price=120, edition=3)
+    Book.objects.create(title='Reversing: Secrets of Reverse Engineering', author='E. Eilam', price=97, edition=2)
+    Book.objects.create(title='The Hundred-Page Machine Learning Book', author='Andriy Burkov', price=100, edition=4)
+
+    return HttpResponse("Data inserted successfully!")
+
+
+def simple_query(request):
+    mybooks = Book.objects.filter(title__icontains='and')
+    return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+
+
+def complex_query(request):
+    mybooks = Book.objects.filter(
+        author__isnull=False
+    ).filter(
+        title__icontains='s'
+    ).filter(
+        edition__gte=2
+    ).exclude(
+        price__lte=100
+    )[:10]
+
+    if len(mybooks) >= 1:
+        return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+    else:
+        return render(request, 'bookmodule/indexs.html')
